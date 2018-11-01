@@ -1,31 +1,30 @@
-﻿@model IEnumerable<StudentRegistrationApplication.Models.Student>
+﻿@model IEnumerable<StudentRegistrationApplication.Models.Course>
 @{
-    ViewBag.Title = "Students";
+    ViewBag.Title = "Courses";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Students</h2>
-@if (!Model.Any())
-{
-    <p>we don't have any students yet. </p>
-}
-else
-{
-    <table class="table table-bordered table-hover">
-        <thead>
-            <tr>
-                <th>Student</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var student in Model)
-            {
-            <tr>
-                <td>@Html.ActionLink(student.Name, "Details", "Students", new { id = student.Id }, null)</td>
+<h2>Courses</h2>
 
+<table class="table table-bordered table-hover">
+    <thead>
+        <tr>
+            <th>Course</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var course in Model)
+        {
+            <tr>
+                <td>@course.Name</td>
+                
             </tr>
-            }
-        </tbody>
-    </table>
-}
+        }
+    </tbody>
+</table>
+
+
+
+
+
 
