@@ -28,7 +28,7 @@ namespace StudentReg.Controllers
         }
         public ActionResult Details(string id)
         {
-            var student = _context.Students.SingleOrDefault(c => c.Id == id);
+            var student = _context.Students.Include(c => c.AcademicType).SingleOrDefault(c => c.Id == id);
             if (student == null)
                 return HttpNotFound();
             return View(student);

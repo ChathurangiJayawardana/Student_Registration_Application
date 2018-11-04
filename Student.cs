@@ -13,6 +13,7 @@ namespace StudentRegistrationApplication.Models
         [StringLength(255)]
         public string Name { get; set; }
         public string IndexNo { get; set; }
+        public DateTime? RegisterDate { get; set; }
         public AcademicType AcademicType { get; set; }
         public byte AcademicTypeId { get; set; }
     }
