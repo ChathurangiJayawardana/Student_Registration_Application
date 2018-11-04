@@ -8,6 +8,7 @@ namespace StudentRegistrationApplication.Models
     public class AcademicType
     {
         public byte Id { get; set; }
+        public string DegreeName { get; set; }
         public int NoOfCourses { get; set; }
         public int TotalCredits { get; set; }
         public byte year { get; set; }
