@@ -1,4 +1,5 @@
 ﻿using StudentRegistrationApplication.Models;
+using StudentRegistrationApplication.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -22,7 +23,12 @@ namespace StudentReg.Controllers
         }
         public ActionResult New()
         {
-            return View();
+            var academicTypes = _context.AcademicTypes.ToList();
+            var viewModel = new NewStudentViewModel
+            {
+                AcademicTypes = academicTypes
+            };
+            return View(viewModel);
         }
         // GET: Students
         public ViewResult Index()
