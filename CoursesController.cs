@@ -4,25 +4,40 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Data.Entity;
 
 namespace StudentRegistrationApplication.Controllers
 {
     public class CoursesController : Controller
     {
+        private ApplicationDbContext _context;
+        public CoursesController()
+        {
+            _context = new ApplicationDbContext();
+        }
+        protected override void Dispose(bool disposing)
+        {
+            _context.Dispose();
+        }
+
         // GET: Courses
         public ViewResult Index()
         {
-            var courses = GetCourses();
+            var courses = _context.Courses.Include(m => m.Department).ToList();
             return View(courses);
         }
-        private IEnumerable<Course> GetCourses()
+        public ActionResult Details(string id)
         {
-            return new List<Course>
-            {
-                new Course{ Id="CM1100",Name="Mathematics and Statistics"},
-                 new Course{ Id="IN1400",Name="Database Management System"},
-                 new Course{Id="Is1200",Name="Principals of Management"}
-            };
+            var course = _context.Courses.Include(m => m.Department).SingleOrDefault(m => m.Id == id);
+            if (course == null)
+
+
+                return HttpNotFound();
+
+            return View(course);
+
+        }
+
+
         }
     }
-}
