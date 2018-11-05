@@ -20,6 +20,10 @@ namespace StudentReg.Controllers
         {
               _context.Dispose();
         }
+        public ActionResult New()
+        {
+            return View();
+        }
         // GET: Students
         public ViewResult Index()
         {
@@ -33,6 +37,8 @@ namespace StudentReg.Controllers
                 return HttpNotFound();
             return View(student);
         }
+
+
        
     }
 }
