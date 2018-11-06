@@ -34,9 +34,22 @@ namespace StudentReg.Controllers
             return View("StudentForm", viewModel);
         }
         [HttpPost]
-        public ActionResult Create(Student student)
+        public ActionResult Save(Student student)
         {
-            _context.Students.Add(student);
+            if (student.Id == null)
+                _context.Students.Add(student);
+            else
+            {
+                var studentInDb = _context.Students.Single(c => c.Id == student.Id);
+
+                studentInDb.Name = student.Name;
+                studentInDb.RegisterDate = student.RegisterDate;
+                studentInDb.IndexNo = student.IndexNo;
+                studentInDb.RegisterDate = student.RegisterDate;
+                studentInDb.AcademicType = student.AcademicType;
+
+            }
+
             _context.SaveChanges();
             return RedirectToAction("Index", "Students");
         }
@@ -47,7 +60,7 @@ namespace StudentReg.Controllers
             {
                 AcademicTypes = academicTypes
             };
-            return View(viewModel);
+            return View("StudentForm",viewModel);
         }
         // GET: Students
         public ViewResult Index()
