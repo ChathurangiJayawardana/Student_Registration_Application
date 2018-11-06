@@ -21,6 +21,14 @@ namespace StudentReg.Controllers
         {
               _context.Dispose();
         }
+
+        [HttpPost]
+        public ActionResult Create(Student student)
+        {
+            _context.Students.Add(student);
+            _context.SaveChanges();
+            return RedirectToAction("Index", "Students");
+        }
         public ActionResult New()
         {
             var academicTypes = _context.AcademicTypes.ToList();
