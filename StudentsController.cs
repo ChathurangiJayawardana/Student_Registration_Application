@@ -21,7 +21,18 @@ namespace StudentReg.Controllers
         {
               _context.Dispose();
         }
-
+        public ActionResult Edit(string id)
+        {
+            var student = _context.Students.SingleOrDefault(c => c.Id == id);
+            if (student == null)
+                return HttpNotFound();
+            var viewModel = new StudentFormViewModel
+            {
+                Student = student,
+                AcademicTypes = _context.AcademicTypes.ToList()
+            };
+            return View("StudentForm", viewModel);
+        }
         [HttpPost]
         public ActionResult Create(Student student)
         {
@@ -32,7 +43,7 @@ namespace StudentReg.Controllers
         public ActionResult New()
         {
             var academicTypes = _context.AcademicTypes.ToList();
-            var viewModel = new NewStudentViewModel
+            var viewModel = new StudentFormViewModel
             {
                 AcademicTypes = academicTypes
             };
